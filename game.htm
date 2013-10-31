@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">			
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  		<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, width=device-width" />
+  		<title>Snake Madness! by Mor Kalfon</title>
+		<!--http://html5reset.org HTML reset stylesheet-->
+		<link rel="stylesheet" href="css/reset.css">
+		<!--Our main stylesheet-->
+		<link rel="stylesheet" href="css/game.css">
+		<!--Scripts goes here-->
+		<script type="text/javascript" src="js/vendor/modernizr.custom.js"></script>
+		<script type="text/javascript" src="js/gameRequestAnimiation.js"></script>
+		<script type="text/javascript" src="js/gameUtils.js"></script>
+		<script type="text/javascript" src="js/gamePage.js"></script>
+		<script type="text/javascript" src="js/gamePrototypes.js"></script>
+		<script type="text/javascript" src="js/game.js"></script>		
+	</head>	
+	<body onload="main()">					
+		<header>
+			<img id="logo_snake" src="img/logo/logo_snake.png" alt="logo_snake"/>
+			<img id="logo_text" src="img/logo/logo_text.png" alt="logo_text"/>
+		</header>		
+		<article>
+			<audio id="backgroundSound" src="music/background.mp3" preload="auto" loop>						
+			</audio>
+			<audio id="eatingSound" src="music/eat.mp3" preload="auto">
+			</audio>
+			<audio id="gameOverSound" src="music/gameover.mp3" preload="auto">
+			</audio>		
+			<div id="main">
+				<canvas class="canvasClass" id="backgroundLayer" width="1024" height="600">
+					<b>Canvas not supported, this game will not be loaded.</b>		
+				</canvas>
+				<canvas class="canvasClass" id="frontLayer" width="1024" height="600">
+					<b>Canvas not supported, this game will not be loaded.</b>				
+				</canvas>
+			</div>
+			<!--Sound control button-->
+			<div id="soundButton" onclick="soundControl()">				
+			</div>
+		</article>		
+		<footer>
+			<p>Coding and design &copy; 2013 by Mor Kalfon.
+			<br>Contact me: <a href="mailto:zefferno@gmail.com">zefferno@gmail.com</a></p>
+		</footer>
+	</body>	
+</html>

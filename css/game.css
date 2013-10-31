@@ -1,0 +1,97 @@
+/* =======================================================================================
+ * HTML elements
+ * =======================================================================================
+ */
+
+body {
+	width: 1024px;
+	margin: 50px auto 0px;
+	background: darkgreen;
+	color: #CCC;
+}
+
+a:link {
+	color: lightgreen;
+}     
+a:visited {
+	color: lightgreen;
+}  
+a:hover {
+	color: green;
+}
+a:active {
+	color: green;
+} 
+
+footer {
+	font-family: verdana, arial, helvetica, freesans, sans-serif;
+	width: 100%;
+	color: white;
+	text-align: center;
+}
+
+/* =======================================================================================
+ * Divs
+ * =======================================================================================
+ */
+
+#main {
+	width: 1024px; height: 600px;
+	position: relative;
+}
+
+.canvasClass {
+	display:block;
+	box-shadow: 2px 2px 5px 2px black;
+	border-radius: 10px;
+	border: 2px solid black;
+	position: absolute;
+	left:0;
+	top:0;
+}
+
+#canvasBack {
+	z-index: 0;
+}
+
+#canvasFront {
+	z-index: 1;
+}
+
+#logo_snake {
+	width: 60px;
+	height: 60px;	
+}
+
+#logo_text {
+	width: 600px;
+	height: 60px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	
+}
+
+#soundButton {
+	position: relative;
+	top: -32px;
+	left: 1036px;	
+	height: 32px;
+	width: 32px;
+	background-image: url('../img/sound/mute.png');
+	cursor: pointer;
+}
+
+/* =======================================================================================
+ * Fonts
+ * =======================================================================================
+ */
+
+@font-face {
+    font-family: 'Pacmania';
+    src: url('../fonts/Pacmania.ttf');
+}
+
+@font-face {
+    font-family: 'Typhoon';
+    src: url('../fonts/Typhoon.ttf');
+}

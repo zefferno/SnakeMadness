@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="he">
+	<head>
+		<meta charset="UTF-8">			
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  		<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, width=device-width" />
+  		<title>Snake Madness! by Mor Kalfon</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/prism.css">
+		<script type="text/javascript" src="js/vendor/prism.js"></script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-27572382-2', 'zefferno.github.io');
+		  ga('send', 'pageview');
+		</script>		
+	</head>	
+	<body>					
+		<header>
+			<img id="logo_snake" src="img/logo/logo_snake.png" alt="logo_snake"/>
+			<img id="logo_text" src="img/logo/logo_text.png" alt="logo_text"/>
+		</header>
+		<nav>
+			<ul>
+				<p>קפוץ:</p>
+				<li><a href="#introduction">הקדמה</a></li>
+				<li><a href="#section1">חלוקת הקבצים</a></li>
+				<li><a href="#section2">מבנה המשחק</a></li>
+				<li><a href="#section3">לוגיקה ויישום</a></li>
+				<li><a href="#section4">עזרים</a></li>
+				<li><a href="#section5">הגדרות המשחק</a></li>
+				<li><a href="#startgame">התחל משחק</a></li>				
+			</ul>			
+		</nav>
+		<article>
+			
+			<h1 id="introduction">
+				הקדמה:
+			</h1>
+			<br/>
+			<p>
+			    תגיד ה-<a href="http://en.wikipedia.org/wiki/Canvas_element">Canvas</a> (או אלמנט ה-Canvas) מאפשרת יצירה של גרפיקה דו-מימדית(2D) על גבי משטח המוגדר בדף
+			    ה-HTML5. השליטה בתגית נעשת באמצעות שפת Javascript.
+			</p>
+			<br/>
+			<p>
+				חשוב לציין כי קיימים מדרכים רבים ומגוונים ברשת המאפשרים למידה של תגית ה-Canvas. במקום להתמקד בנישה אחת ספציפית ב-Canvas החלטתי לבחור בלנסות לפתח משחק מחשב
+				כאמצעי למידה על האלמנט ועל עולם פיתוח משחקי המחשב. המשחק שבחרתי הינו עשייה מחודשת (Remake) למשחק הנחש (Snake) המוכר לרובנו מהטלפון הסלולרי Nokia.
+			</p>			    
+			<br/>
+			<strong>דרישות מקדימות:</strong>
+			<br/>
+			<p>
+				אני מניח כי יש ברשותכם ידע בתכנות בשפת JavaScript לסביבת אינטרנט היות ומדריך זה עוסק בעיקר בקוד של JavaScript ולוגיקה של פיתוח משחקי מחשב.
+				מדריך זה לא יעסוק בהסברים מפורטים של הקוד הכתוב היות ובקוד עצמו ישנו תיעוד מפורט שעשיתי.
+				<br/>
+				<br/>
+				במידה ותרצו להעמיק את הניסיון שלכם בתכנות בשפת JavaScript לסביבת האינטרנט,
+				אני ממליץ לכם לנסות את <a href="https://developer.mozilla.org/en/learn/javascript">האתר של מפתחי Mozilla</a>.
+				<br/>
+				<br/>
+			</p>
+			<strong>דרישות תוכנה:</strong>
+			<p>
+				הדפדפן המומלץ לשימוש בתוצרי הפרויקט הינו Firefox Mozilla מהגרסאות האחרונות (נכון להיום 20 ומעלה).
+				<br/>
+				Chrome מגרסה 30 נבדק ונמצא עובד עם התוצר.
+				<br/>
+				<strong>Internet Explorer אינו נבדק באופן מלא וישנם בעיות תאימות עם גרסה 10.</strong>
+			</p>
+			<br/>
+			
+			
+			<h1 id="section1">
+				חלוקת הקבצים:
+			</h1>
+			<br/>
+			<p>
+				שימו לב כי הפרוייקט מכיל מספר תיקיות בעלי שמות משמעותיים:
+				<br/>
+				<br/>
+				<em>תיקיית css</em>
+				- מכילה את הסגנונות לדפי ה-HTML. בתוכה קובץ בשם <strong>main.css</strong><strong> </strong>המכיל את הסגנון לדף מדריך זה וקובץ בשם <strong>game.css</strong>    <strong> </strong>המכיל את הסגנון לדף המשחק. קובץ ה-<strong>reset.css</strong> הינו סגנון אתחול (reset) לסגנונות והגדרות ברירת המחדל המגיעים עם הדפדנים
+				השונים.
+				<br/>
+				<br/>
+				<em>תיקיית fonts</em>
+				– מכילה שני פונטים מסוג TTF בהם עשיתי שימוש במשחק. פונט בשם <strong>Pacmania</strong> משמש בטקסט הפתיחה והסגירה של המשחק ופונט בשם <strong>Typhoon</strong> המשמש כפונט לתוצאת המשחק בצידו
+				השמאלי התחתון של המסך.
+				<br/>
+				<br/>
+				<em>תיקיית img</em>
+				– מכילה מספר תתי-תיקיות המכילות קבצי תמונה המשמשים את המשחק.
+				<br/>
+				background – משמשת לרקעי המסך.
+				<br/>
+				food – משמשת למזון הנחש.
+				<br/>
+				logo – לוגו המשחק.
+				<br/>
+				sound – כפתור הפעלה וביטול לקול המשחק.
+			</p>
+			<p>
+				<br/>
+				<em>תיקיית music</em>
+				– מכילה את קבצי הקול של המשחק.
+				<br/>
+				<br/>
+				<em>תיקיית </em>
+				<em>vendor</em>
+				– מכילה מימושים של תוספות עזר שהורדתי מהאינטרנט.
+				<br/>
+				<br/>
+				<em>תיקיית js</em>
+				– מכילה את קבצי הסקריפט שהינם ליבת המשחק.
+				<br/>
+				gamePage.js – קובץ המטפל בעיקר באירועים ובפונקציות הקשורות לדף game.htm.
+				<br/>
+				game.js – ליבת המשחק. מכיל את כל הפונקציונליות של העבודה מול אלמנט ה-Canvas.
+				<br/>
+				gamePrototypes.js – מכיל אבי טיפוס של אובייקטים שבהם המשחק עושה שימוש (Food, Background, Sprite).
+				<br/>
+				gameRequestAnimation.js – מכיל פונקציונליות לגבי בקשת פריימים לאנימציה מהדפדפן.
+				<br/>
+				gameUtils.js – מכיל פונקציות עזר למשחק.
+			</p>
+			<br/>
+						
+			<h1 id="section2">
+				מבנה המשחק:
+			</h1>
+			<br/>
+			<p>
+			הקובץ game.js תחת התיקייה js הקובץ מכיל פונקציה בשם Game.
+			</p>
+			<br/>
+			<p>
+				ליבת המשחק בנויה כולה מפונקציה Game העוטפת בתוכה את כלל הפונקציות, המשתנים והאובייקטים הקשורים למשחק. יש לציין כי נהוג לעשות שימוש בפונקציה אחת העוטפת את
+				כל קוד והאובייקטים הקשורים למשחק כדי לשמר את מרחב השמות (DOM namespace).
+			</p>
+			<pre class='language-javascript'>
+			<code>
+// Contexts to Canvas tags
+var frontLayer;
+var frontLayerHeight;
+var frontLayerWidth;	
+var backLayer;
+var backLayerHeight;
+var backLayerWidth;
+
+// Sprites Containers
+var backgroundContainer = [];
+var foodContainer = [];
+
+// Snake representation	
+var snakeArray;
+// Snake food
+var food;
+// Score counter
+var score = 0;
+// RequestAnimationFrame handle ID
+var requestAnimationID = undefined;
+// Snake current direction
+var currentDirection = -1;
+// Background screen number
+var screenNumber = -1;
+// Start game trigger
+var startGameTrigger;
+// Enable/disable sound trigger
+var soundEnabled = gameConfig.soundEnabled;
+
+// Audio objects
+var backgroundAudio;
+var eatingAudio;
+var gameOverAudio;					
+			</code>
+			</pre>
+			<br/>
+			<p>
+				נבחן את מאפייני הפונקציה הכללית Game:
+				<br/>
+				בשורות הראשונות נשמור את אורך ורוחב השכבות והקשר אליהם בדף (Context) עליו נדון בהמשך.
+			</p>			
+			<p>
+				לאחר מכן נשמור "מכולות" לאובייקטים Background ו-Food (רקע ואוכל).
+				<br/>
+				"מכולה" הינו מערך דימני השומר את המופעים (Instances) של האובייקטים רקע ואוכל.
+				<br/>
+				<br/>
+				הנחש מיוצג במשחק באמצעות מערך בשם snakeArray המכיל שיעורי נקודה (Coordinates) במרחב.
+			</p>
+			<p>
+				food - ישמור את מופע האוכל (Food) במרחב.
+				<br/>
+				score - ישמור את תוצאת המשחק בנקודות.
+				<br/>
+				requestAnimationID - ישמור מזהה הפניה לפונקציה requestInterval.
+				<br/>
+				currentDirection - ישמור את הכיוון אליו מיועד הנחש לנוע.
+				<br/>
+				screenNumber - ישמור את מספר הרקע שיטען למשחק.
+				<br/>
+				startGameTrigger - ישמור טריגר להפעלת המשחק (שיופעל כאשר המשתמש ילחץ על מקש האנטר).
+				<br/>
+				soundEnabled - ישמור טריגר להפעלת אודיו במשחק.
+				<br/>
+				<br/>
+				האובייקטים backgroundAudio, eatingAudio ו-gameOverAudio ישמרו את האובייקטים שנבחרו לשימוש כקבצי הקול בקובץ game.htm.
+			</p>
+			<br/>
+			<strong>פונקציות ציבוריות:</strong>
+			<br/>
+			<br/>
+			<p>
+				start - מפעילה את הלוגיקה של הפונקציה Game.
+			</p>
+			<p>
+				setSound – המכבה/מדליקה את אופציית הקול במשחק.
+			</p>
+			<br/>
+			<strong>פונקציות פרטיות:</strong>
+			<br/>
+			<br/>
+			<p>
+				eventGameHandler – מטפלת באירוע מקשי חצים במקלדת. הפונקציה מעדכנת את המשתנה currentDirection בהתאם.
+				<br/>
+				eventStartHandler – מטפלת באירוע מקש Enter במקלדת.
+				<br/>
+				drawCenterText – מטפלת בכתיבת טקסט למסך.
+				<br/>
+				renderScene – מטפלת בלולאת האנימציה הנקראת על ידי הפונקציה requestInterval. משמשת לעדכון אובייקטים במסך בזמן האנימציה.
+				<br/>
+				clearScreen – משמשת לניקוי שכבות המשחק.
+				<br/>
+				gameOver – מופעלת כאשר המשחק מסתיים.
+				<br/>
+				isPointCollidesWithWall, IsPointCollidesWithSnakeBody, isFoodCollidesWithSnakeBody, isFoodCollidesWithSnakeHead – מטפלות בדיקות התנגשות של אובייקטים במשחק
+				– נקודה עם קיר, נקודה עם גוף הנחש, אוכל עם גוף הנחש ואוכל עם ראש הנחש.
+				<br/>
+				updateScene – מטפלת בעדכון מאפייני האובייקטים במסך ונקראת מתוך renderScene.
+				<br/>
+				selectRandomBackground – בוחרת רקע מתוך הרשימה באופן אקראי.
+				<br/>
+				drawBackground – מציירת את הרקע במסך.
+				<br/>
+				drawFood – מציירת את האוכל במסך.
+				<br/>
+				drawSnakeArray – מציירת את גוף הנחש.
+				<br/>
+				drawScore – מציירת את ציון השחקן.
+				<br/>
+				addRandomFood – מוסיפה אוכל אקראי למסך במיקום אקראי.
+				<br/>
+				getRandomFood – פונקציית עזר לפונקציה addRandomFood הבוחרת אוכל לפי עלות.
+				<br/>
+				buildSnakeBody – פונקציית עזר לפונקציה init. משמשת לבניית מערך הנחש הבנוי על פי שיעורי נקודות X ו-Y במרחב הדו-מימדי.
+				<br/>
+				checkRequirements – בודקת את דרישות המשחק מהדפדפן.
+				<br/>
+				init – פונקציית האתחול של הפונקציה Game. אחראית ליצירת קשר אל האובייקטים של ה-Canvas, טעינת האובייקטים של הקול, התמונה ויצירת מערך הנחש.
+			</p>
+			<br/>
+					
+			<h1 id="section3">
+			    לוגיקה ויישום:
+			</h1>
+			<br/>
+			<p>
+				לאחר שסקרנו את הפונקציות המרכזיות של המשחק נפרט על הלוגיקה והיישום שלה במשחק.
+				<br/>
+				<br/>
+				במשחק קיימים מספר אובייקטים (שחלקם הוגדרו בקובץ gamePrototypes.js): נחש (המוגדר כמערך snakeArray), אוכל(GameFood), דמות(GameSprite) ומרקע (GameBackground).
+				נחש ואוכל "יורשים" (Inherit) ומרחיבים (Extends) את המאפיינים של דמות. דמות הינה אובייקט בסיסי במשחק המטפל בתמונה.
+				<br/>
+				<br/>
+				המרקע במשחק הינו סטטי ואינו משתנה במהלך המשחק. האוכל והנחש הינם אובייקטים דינמיים ומשתנים על פי קלט המשתמש.
+				<br/>
+				<br/>
+				המשחק פועל בלולאה תחת הפונקציה הנקראת renderScene המכילה את הפונקציונליות הדרושה לעדכון מסך המשחק.
+				<br/>
+				<br/>
+				הנחש נע באמצעות אירועי מקשים המטופלים על ידי הפונקציה eventGameHandler וגודל ומתעדכן בעזרת הפונקציה updateScene הנקראת בכל פריים של אנימציה.
+				<br/>
+				<br/>
+				במשחק מספר פונקציות המטפלות בהתנגשויות אפשריות של אובייקטים (ניתן לבחון זאת בפונקציה updateScene):
+				<br/>
+				כאשר אוכל מתנגש עם ראש של נחש - הנחש "גודל" בקובייה אחת.
+				<br/>
+				כאשר אוכל מתנגש עם גוף הנחש – בעת ציור מזון במסך המשחק יש צורך בבדיקת התנגשות עם גוף הנחש.
+				<br/>
+				כאשר נקודה מתנגשת עם קיר – על פי חוקי המשחק כאשר הנחש חורג מגבולות המסך יש צורך לסיים את המשחק.
+				<br/>
+				כאשר נקודה מתנגשת עם גוף הנחש – כאשר ראש הנחש מתנגש בגוף הנחש יש צורך לסיים את המשחק.
+				<br/>
+				<br/>
+			</p>
+			<p>
+				אנימציה במשחק אפשרית באמצעות קריאה לפונקציות window.requestInterval ו-window.clearRequestInterval (הקיימות בקובץ gameRequestAnimation.js). הפונקציות הללו
+				מטפלות במגוון הדפדפנים הקיים בשוק, כאשר לכל דפדפן ישנו API המספק גישה לקבלת אנימציה.
+			</p>
+			<br/>
+			
+			<h1 id="section4">
+				עזרים:
+			</h1>
+			<br/>
+			<p>
+			    בקובץ gameUtils.js קיימת הפונקציה הגלובלית GameUtils המכילה מספר פונקציות המשמשות כפונקציות עזר למשחק.
+			<br/>
+			    getRandom – המחזירה מספר אקראי בין תחום תחתון לעליון.
+			<br/>
+			    round – המעגלת מספר ממשי.
+			</p>
+			<p>
+			    getImage – היוצרת אובייקט מסוג Image מתוך מקור של קובץ (src).
+			</p>
+			<p>
+			    registerEvent – רושמת אירוע במערכת וקוראת לפונקציה מטפלת.
+			</p>
+			<p>
+			    unRegisterEvent – מוחקת אירוע מהמערכת.
+			</p>
+			<p>
+			    increaseBrightness – מגדילה את בהירות הצבע באחוזים.
+			</p>
+			<p>
+			    acquireContext – מקבלת קשר (context) למשטח ה-Canvas. הקשר מאפשר לקרוא לפונקציות הגרפיקה הדרושות לציור המשטח.
+			</p>
+			<p>
+			    getCanvasSize – פונקציה המחזירה את אורך ורוחב המשטח לטיפול פנימי בשינוי גדלים.
+			</p>
+			<br/>
+			
+			<h1 id="section5">
+			    הגדרות המשחק:
+			</h1>
+			<br/>
+			<p>
+			    במשחק יש מבנה הגדרות (תחת הקובץ gamePage.js) המוגדר בעת קריאה להפעלתו.
+			</p>
+			<br/>
+			<pre class='language-javascript'>
+				<code>
+var constants = { DIRECTION_UP:     1,
+                  DIRECTION_DOWN:   2,
+                  DIRECTION_RIGHT:  3,
+                  DIRECTION_LEFT:   4,
+                  KEY_UP: 		    38,
+                  KEY_DOWN:         40,
+                  KEY_RIGHT:        39,
+                  KEY_LEFT:         37,
+                  KEY_ENTER:        13 };
+
+var FOOD_SPRITES        = [ {name: 'apple',      src: 'img/food/apple.png',      score: 10,  cost: 0},
+					        {name: 'orange',     src: 'img/food/orange.png',     score: 10,  cost: 0},
+					        {name: 'bananas',    src: 'img/food/bananas.png',    score: 100, cost: 8},
+					        {name: 'strawberry', src: 'img/food/strawberry.png', score: 10,  cost: 0} ];
+					        
+var BACKGROUNDS_SPRITES = [ {src: 'img/background/grass.jpg'},
+							{src: 'img/background/grass2.png'} ];
+
+var gameConfiguration = { foodSprites: FOOD_SPRITES,
+						  backgroundSprites: BACKGROUNDS_SPRITES,
+						  frontLayerId: 'frontLayer',
+						  backLayerId: 'backgroundLayer',
+						  backgroundSoundId: 'backgroundSound',
+						  eatSoundId: 'eatingSound',
+						  gameOverSoundId: 'gameOverSound',
+						  gameSpeed: 100,
+						  snakeStartLength: 3,
+						  snakeStartYPos: 3,
+						  snakeStartDirection: constants.DIRECTION_RIGHT,
+						  snakeSize : 30,
+						  scoreText: 'Score: ',
+						  snakeColor: '#8A822E',
+						  gameOverText: 'Game Over!',
+						  gameOverTextSize: 50,
+						  gameStartText: 'Press Enter to start...',
+						  gameStartTextSize: 50,
+						  soundEnabled: true };
+			</code>
+			</pre>
+			<br/>
+			<p>
+			    נבחן את הפרמטרים בקונפיגורציה:
+			</p>
+			<br/>			
+			<p>
+				foodSprites – מכיל מערך מאפיינים של מזונות. המערך מכיל את שם המזון, מקור קובץ התמונה, ניקוד המזון (בעת אכילתו על ידי הנחש) ועלות הצגתו על המסך (ככול שהעלות
+				עולה כך האוכל פחות יופיע במשחק).
+				<br/>
+				backgroundSprites – מכיל מערך מאפיינים של רקעים.
+				<br/>
+				frontLayerId ו-backLayerId הינם מזהים לאובייקטים של Canvas שהוגדרו בקובץ game.htm.
+				<br/>
+				eatSoundId ו-backgroundSonudId הינם מזהים לאובייקטים של Audio שהוגדרו בקובץ game.htm.
+				<br/>
+				gameSpeed – מגדיר את מהירות תזוזת הנחש בקירוב ל-FPS(פריימים לשנייה).
+				<br/>
+				snakeStartLength – מגדיר את גודל הנחש.
+				<br/>
+				snakeStartYPos – מגדיר את שיעור ה-Y בה יתחיל הנחש לנוע בעת התחלת המשחק.
+				<br/>
+				snakeStartDirection – מגדיר את כיוון התחלת הנחש בעת התחלת המשחק.
+				<br/>
+				snakeSize – גודל קוביות הנחש.
+				<br/>
+				scoreText – יוצג בעת הצגת תוצאת הניקוד.
+				<br/>
+				snakeColor – יציין בקוד Hex את צבע הנחש.
+				<br/>
+				gameOverText – יוצג בעת סיום המשחק.
+				<br/>
+				gameOverTextSize – גודל הפונט של הטקסט בסיום המשחק.
+				<br/>
+				gameStartText – יוצג בעת התחלת המשחק.
+				<br/>
+				gameStartTextSize – גודל הפונט של הטקסט בתחילת המשחק.
+				<br/>
+				soundEnabled – הפעלה או כיבוי קול במשחק.
+			</p>			
+			<br/>			
+				
+			<h1 id="startgame">
+				התחל משחק:
+			</h1>
+			<br/>
+			<p>
+				<a href="game.htm" target="_blank">לחץ פה</a>
+				על מנת להתחיל לשחק.
+			</p>					
+		</article>		
+		<footer>
+			<p>Coding and design &copy; 2013 by Mor Kalfon.
+			<br/>Contact me: <a href="mailto:zefferno@gmail.com">zefferno@gmail.com</a></p>						
+		</footer>
+	</body>	
+</html>

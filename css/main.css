@@ -1,0 +1,124 @@
+/* =======================================================================================
+ * HTML elements
+ * =======================================================================================
+ */
+
+body {
+	width: 1024px;
+	margin: 50px auto 0px;
+	background: darkgreen;
+	color: #CCC;	
+}
+
+nav {
+	direction: rtl;
+	margin-bottom: 10px;
+}
+
+nav li, 
+nav p {
+	display: inline-block;
+	font-family: verdana, arial, helvetica, freesans, sans-serif;
+	font-size: large;
+}
+
+nav p {
+	color: white;	
+}
+
+nav li a {
+	text-decoration: none;
+	display: inline-block;
+	padding:5px 21px;
+	background:#35b128;
+	border:1px solid #33842a;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+	box-shadow: 0 0 4px rgba(0,0,0, .75);	
+}
+
+nav li a:hover, 
+nav li a:focus{
+	background-color :yellow ;
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	box-shadow: 0 0 1px rgba(0,0,0, .75);
+}
+
+article {
+	direction: rtl;
+	border: 2px solid black;
+	box-shadow: 3px 3px 5px black;
+	background: white;
+	padding: 10px 30px 30px 30px;
+}
+
+strong { 
+	font-weight: bold;
+	color: black;
+}
+
+article p, 
+h1 {
+	color: black;
+	font-family: verdana, arial, helvetica, freesans, sans-serif;
+	font-size: medium;
+}
+
+article h1 {
+	font-size: x-large;
+	 
+}
+
+article a:link, 
+article a:visited {
+	color: green;	
+}
+
+article a:hover, 
+article a:active {
+	color: dimgrey;	
+}
+
+a:link, 
+a:visited  {
+	color: lightgreen;
+}
+     
+a:hover, 
+a:active {
+	color: green;
+}
+
+footer {
+	font-family: verdana, arial, helvetica, freesans, sans-serif;
+	width: 100%;
+	color: white;
+	margin-top: 10px;
+	text-align: center;
+}
+
+em {
+	font-style: normal;
+  	text-decoration: underline; 
+}
+
+/* =======================================================================================
+ * ID's
+ * =======================================================================================
+ */
+
+#logo_snake {
+	width: 60px;
+	height: 60px;	
+}
+
+#logo_text {
+	width: 600px;
+	height: 60px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}

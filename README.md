@@ -1,7 +1,7 @@
 SnakeMadness!
 =============
 
-Snake Madness! (snake game remake) game created using the <canvas> element of HTML5.
+Snake Madness! (snake game remake) game created using the Canvas element of HTML5.
 
 Written for a web development course.
 
